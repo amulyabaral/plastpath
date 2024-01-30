@@ -16,5 +16,5 @@ for forward_read in $(cat forward_reads.txt); do
     sample_name="$(basename "$forward_read" _1.fq.gz)"
     echo -e "Now processing \n Forward read: $forward_read \n Reverse read: $reverse_read \nSample name is $sample_name"
  #   kraken2 --threads 32 --gzip-compressed --db kraken2_database/kraken2_standard --paired $forward_read $reverse_read --output /mnt/SCRATCH/amulyab/PLASTPATH/kraken2_output/$sample_name.kraken_out.txt --report /mnt/SCRATCH/amulyab/PLASTPATH/kraken2_output/$sample_name.kraken_report.txt ;
-    kma -ipe $forward_read $reverse_read -mem_mode -ef -1t1 -cge -nf -vcf -t 32 -o /mnt/SCRATCH/amulyab/PLASTPATH/kma_output/$sample_name -t_db /mnt/SCRATCH/amulyab/PLASTPATH/kma_output/nt_protein_homolog_index/nt_protein_homolog
+    kma -ipe $forward_read $reverse_read -mem_mode -ef -1t1 -cge -nf -vcf -t 32 -o /mnt/project/PLASTPATH/kma_output/$sample_name -t_db /mnt/SCRATCH/amulyab/PLASTPATH/kma_output/nt_protein_homolog_index/nt_protein_homolog
 done

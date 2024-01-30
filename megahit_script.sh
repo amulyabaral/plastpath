@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --ntasks=32               # 1 core(CPU)
 #SBATCH --nodes=1                # Use 1 node
-#SBATCH --job-name=kma   # sensible name for the job
+#SBATCH --job-name=assembly_plastpath   # sensible name for the job
 #SBATCH --mem=200G                 # Default memory per CPU is 3GB.
-#SBATCH --partition=hugemem-avx2     # Use the smallmem-partition for jobs requiring < 10 GB RAM.
+#SBATCH --partition=gpu     # Use the smallmem-partition for jobs requiring < 10 GB RAM.
 #SBATCH --mail-user=amulya.baral@nmbu.no # Email me when job is done.
 #SBATCH --mail-type=ALL
 

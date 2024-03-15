@@ -8,5 +8,5 @@
 
 labels=$(find /mnt/project/PLASTPATH/megahit_output/*/final.contigs.fa -exec dirname {} \; | xargs -I{} basename {} | tr '\n' ',')
 labels="${labels%,}"
-/mnt/project/PLASTPATH/quast-5.2.0/metaquast.py -o /mnt/project/PLASTPATH/metaquast_output --labels "$labels" -t 32 $(find /mnt/project/PLASTPATH/megahit_output/*/final.contigs.fa | sed ':a;N;$!ba;s/\n/, /g')
+/mnt/project/PLASTPATH/quast-5.2.0/metaquast.py -o /mnt/project/PLASTPATH/metaquast_output --labels "$labels" -t 32 $(find /mnt/project/PLASTPATH/megahit_output/*/final.contigs.fa | sed 's/,/, /g')
 

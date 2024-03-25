@@ -1,33 +1,26 @@
 #!/bin/bash
 #SBATCH --ntasks=64              
-#SBATCH --job-name=quast_plastpath   # sensible name for the job
-#SBATCH --mem=245G                 # Default memory per CPU is 3GB.
-#SBATCH --partition=gpu     # Use the smallmem-partition for jobs requiring < 10 GB RAM.
-#SBATCH --mail-user=amulya.baral@nmbu.no # Email me when job is done.
+#SBATCH --job-name=quast_plastpath
+#SBATCH --mem=245G
+#SBATCH --partition=gpu
+#SBATCH --mail-user=amulya.baral@nmbu.no
 #SBATCH --mail-type=ALL
 
 # Function to run QUAST on a group of samples
 run_quast() {
     local group=("$@")
     local label_string=$(printf ",%s" "${group[@]}")
-    label_string=${label_string:1}  # Remove leading comma
+    label_string=${label_string:1}
 
     local files=()
     for sample in "${group[@]}"; do
-        # Adjust the pattern to match exactly the sample name and not beyond
-        # Assumes the naming convention includes an underscore or similar character after the sample name
         file_pattern="/mnt/project/PLASTPATH/megahit_output/${sample}_*/final.contigs.fa"
-        if compgen -G "$file_pattern" > /dev/null; then
-            matched_files=( $file_pattern )
-            for file in "${matched_files[@]}"; do
-                # Verify that the directory exactly matches the sample name followed by a non-alphanumeric character
-                dir_name=$(basename $(dirname "$file"))
-                if [[ "$dir_name" == ${sample}_* ]]; then
-                    files+=("$file")
-                fi
-            done
+        matched_files=( $file_pattern )
+        
+        if [ ${#matched_files[@]} -eq 0 ]; then
+            echo "Warning: No files found for ${sample}, pattern used was $file_pattern"
         else
-            echo "Warning: No files found for pattern $file_pattern"
+            files+=("${matched_files[@]}")
         fi
     done
 
@@ -36,7 +29,7 @@ run_quast() {
         return 1
     fi
 
-    # Run QUAST for the group
+    echo "Running QUAST for ${group[0]} group..."
     python /mnt/project/PLASTPATH/quast-5.2.0/metaquast.py \
         -o "/mnt/project/PLASTPATH/metaquast_output/${group[0]}_group" \
         --labels "$label_string" \

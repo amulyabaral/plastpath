@@ -1,4 +1,10 @@
 #!/bin/bash
+#SBATCH --ntasks=64              
+#SBATCH --job-name=quast_plastpath   # sensible name for the job
+#SBATCH --mem=245G                 # Default memory per CPU is 3GB.
+#SBATCH --partition=gpu     # Use the smallmem-partition for jobs requiring < 10 GB RAM.
+#SBATCH --mail-user=amulya.baral@nmbu.no # Email me when job is done.
+#SBATCH --mail-type=ALL
 
 # Function to run QUAST on a group of samples
 run_quast() {
@@ -10,18 +16,14 @@ run_quast() {
     for sample in "${group[@]}"; do
         files+=("/mnt/project/PLASTPATH/megahit_output/${sample}*/final.contigs.fa")
     done
-    echo "now running ... "
-    echo "/mnt/project/PLASTPATH/metaquast_output/${group[0]}_group"
-    echo "$label_string"
-    echo "${files[@]}"
 
     # Run QUAST for the group
 
-    # /mnt/project/PLASTPATH/quast-5.2.0/metaquast.py \
-     #   -o "/mnt/project/PLASTPATH/metaquast_output/${group[0]}_group" \
-      #  --labels "$label_string" \
-       # -t 128 \
-        #"${files[@]}"
+     python /mnt/project/PLASTPATH/quast-5.2.0/metaquast.py \
+       -o "/mnt/project/PLASTPATH/metaquast_output/${group[0]}_group" \
+       --labels "$label_string" \
+       -t 128 \
+        "${files[@]}"
 }
 
 # Define sample groups

@@ -14,15 +14,24 @@ run_quast() {
 
     local files=()
     for sample in "${group[@]}"; do
-        files+=("/mnt/project/PLASTPATH/megahit_output/${sample}*/final.contigs.fa")
+        file_pattern="/mnt/project/PLASTPATH/megahit_output/${sample}*/final.contigs.fa"
+        if compgen -G "$file_pattern" > /dev/null; then
+            files+=($file_pattern)
+        else
+            echo "Warning: No files found for pattern $file_pattern"
+        fi
     done
 
-    # Run QUAST for the group
+    if [ ${#files[@]} -eq 0 ]; then
+        echo "Error: No contig files found for group ${group[0]}"
+        return 1
+    fi
 
-     python /mnt/project/PLASTPATH/quast-5.2.0/metaquast.py \
-       -o "/mnt/project/PLASTPATH/metaquast_output/${group[0]}_group" \
-       --labels "$label_string" \
-       -t 128 \
+    # Run QUAST for the group
+    python /mnt/project/PLASTPATH/quast-5.2.0/metaquast.py \
+        -o "/mnt/project/PLASTPATH/metaquast_output/${group[0]}_group" \
+        --labels "$label_string" \
+        -t 128 \
         "${files[@]}"
 }
 

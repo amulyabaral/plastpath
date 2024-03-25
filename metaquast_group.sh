@@ -14,9 +14,18 @@ run_quast() {
 
     local files=()
     for sample in "${group[@]}"; do
-        file_pattern="/mnt/project/PLASTPATH/megahit_output/${sample}*/final.contigs.fa"
+        # Adjust the pattern to match exactly the sample name and not beyond
+        # Assumes the naming convention includes an underscore or similar character after the sample name
+        file_pattern="/mnt/project/PLASTPATH/megahit_output/${sample}_*/final.contigs.fa"
         if compgen -G "$file_pattern" > /dev/null; then
-            files+=($file_pattern)
+            matched_files=( $file_pattern )
+            for file in "${matched_files[@]}"; do
+                # Verify that the directory exactly matches the sample name followed by a non-alphanumeric character
+                dir_name=$(basename $(dirname "$file"))
+                if [[ "$dir_name" == ${sample}_* ]]; then
+                    files+=("$file")
+                fi
+            done
         else
             echo "Warning: No files found for pattern $file_pattern"
         fi

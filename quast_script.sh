@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --ntasks=64              
 #SBATCH --job-name=quast_plastpath   # sensible name for the job
-#SBATCH --mem=200                 # Default memory per CPU is 3GB.
+#SBATCH --mem=200G                 # Default memory per CPU is 3GB.
 #SBATCH --partition=gpu     # Use the smallmem-partition for jobs requiring < 10 GB RAM.
 #SBATCH --mail-user=amulya.baral@nmbu.no # Email me when job is done.
 #SBATCH --mail-type=ALL

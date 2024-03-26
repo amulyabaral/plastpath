@@ -46,7 +46,7 @@ while IFS= read -r forward_read; do
     bowtie2-build $assembly_file ${OUTPUT_DIR}${sample_name}_index --threads 128
 
     # Align reads to the assembly and convert to BAM
-    bowtie2 -x ${OUTPUT_DIR}${sample_name}_index -1 $forward_read -2 $reverse_read -S ${OUTPUT_DIR}${sample_name}.sam
+    bowtie2 -x ${OUTPUT_DIR}${sample_name}_index -1 $forward_read -2 $reverse_read -S ${OUTPUT_DIR}${sample_name}.sam --threads 128
     samtools view -bS ${OUTPUT_DIR}${sample_name}.sam > ${OUTPUT_DIR}${sample_name}.bam
     rm ${OUTPUT_DIR}${sample_name}.sam  # Remove intermediate SAM file
 

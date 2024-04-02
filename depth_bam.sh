@@ -7,6 +7,6 @@
 #SBATCH --mail-type=ALL
 
 cd /mnt/project/PLASTPATH/bam_files/
-for bam_file in *.bam; do
+for bam_file in *_sorted.bam; do
     jgi_summarize_bam_contig_depths --outputDepth "${bam_file%.bam}_depth.txt" $bam_file
 done

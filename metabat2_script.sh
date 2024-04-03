@@ -18,7 +18,7 @@ for contig_dir in $CONTIGS_DIR*; do
     if [ -d "$contig_dir" ]; then
         sample_name=$(basename $contig_dir)
         contigs_file="${contig_dir}/final.contigs.fa"
-        depth_file="${DEPTH_DIR}${sample_name}_depth.txt"
+        depth_file="${DEPTH_DIR}${sample_name}_sorted_depth.txt"
         
         if [ -f "$contigs_file" ] && [ -f "$depth_file" ]; then
             output_path="${OUTPUT_BASE}${sample_name}"

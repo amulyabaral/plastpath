@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=metabat2_binning
+#SBATCH --job-name=checkm
 #SBATCH --ntasks=64
 #SBATCH --mem=200G
 #SBATCH --partition=hugemem-avx2

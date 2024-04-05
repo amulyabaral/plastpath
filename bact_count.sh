@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the directory to search for .kraken_report files
-search_dir="/mnt/SCRATCH/amulyab/PLASTPATH/kraken2_output"
+search_dir="/mnt/SCRATCH/amulyab/PLASTPATH/kraken2_output/"
 
 # Define the output file
 output_file="/mnt/project/PLASTPATH/bact_count.txt"
@@ -10,9 +10,9 @@ output_file="/mnt/project/PLASTPATH/bact_count.txt"
 > "$output_file"
 
 # Find all .kraken_report files and process them
-find "$search_dir" -name "*.kraken_report" | while read -r file; do
+find "$search_dir" -name "*.kraken_report.txt" | while read -r file; do
     # Extract the sample name from the file path
-    sample_name=$(basename "$file" ".kraken_report")
+    sample_name=$(basename "$file" ".kraken_report.txt")
 
     # Extract the bacteria read count
     # Assuming the bacteria read counts are always in the same column position (e.g., the second column)

@@ -1,5 +1,6 @@
 #!/bin/bash
-#SBATCH --ntasks=32                               # Number of cores (CPU)
+#SBATCH --ntasks=32                                 # Number of cores (CPU)
+#SBATCH --nodes=1                                   # Number of nodes to use
 #SBATCH --job-name=prokka                  # Job name 
 #SBATCH --mem=128G                                  # Required RAM - Default memory per CPU is 3GB.
 #SBATCH --partition=hugemem                         # Use smallmem for jobs < 10 GB RAM|Options: hugemen, smallmem, gpu

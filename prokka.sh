@@ -9,9 +9,9 @@
 
 module load prokka
 
-for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa; 
+for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa ; 
     do filename=$(basename -- "$contig_file" .fa); 
-    prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename --prefix $filename --cpus 16 $contig_file ;
+    prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename --prefix $filename --metagenome $contig_file ;
 done
 
 

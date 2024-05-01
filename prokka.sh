@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --ntasks=32                                 # Number of cores (CPU)
+#SBATCH --ntasks=16                                # Number of cores (CPU)
 #SBATCH --nodes=1                                   # Number of nodes to use
 #SBATCH --job-name=prokka                  # Job name 
 #SBATCH --mem=128G                                  # Required RAM - Default memory per CPU is 3GB.
@@ -11,7 +11,7 @@ module load prokka
 
 for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa; 
     do filename=$(basename -- "$contig_file" .fa); 
-    prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename --prefix $filename $contig_file --cpus 32;
+    prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename --prefix $filename --cpus 16 $contig_file ;
 done
 
 

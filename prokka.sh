@@ -8,23 +8,21 @@
 #SBATCH --mail-type=ALL
 
 #!/bin/bash
-# Load the Prokka module
+
+# Load the necessary Prokka module
 module load prokka
 
-# Define the input directory containing .fa files
-input_directory="/mnt/project/PLASTPATH/high_quality_bins"
+# Set the directories for input and output
+inputDir="/mnt/project/PLASTPATH/high_quality_bins"
+outputDir="/mnt/project/PLASTPATH/prokka_output"
 
-# Define the output base directory
-output_base_directory="/mnt/project/PLASTPATH/prokka_output"
+# Use find and xargs to process each .fa file
+find "$inputDir" -name "*.fa" -print0 | xargs -0 -I {} bash -c '{
+    baseName=$(basename "{}" .fa);
+    specificOutputDir="'$outputDir'"/"$baseName";
+    mkdir -p "$specificOutputDir";
+    prokka --outdir "$specificOutputDir" --prefix "$baseName" --metagenome "{}";
+}'
 
-# Loop through each .fa file in the input directory
-for contig_file in "${input_directory}"/*.fa; do
-    # Extract the filename without the extension
-    filename=$(basename -- "$contig_file" .fa)
-    
-    # Define the output directory for the current file
-    output_directory="${output_base_directory}/${filename}"
-    
-    # Run Prokka annotation tool
-    prokka --outdir "$output_directory" --prefix "$filename" --metagenome "$contig_file"
-done
+echo "Annotation completed for all contigs."
+

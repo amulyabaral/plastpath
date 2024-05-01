@@ -6,4 +6,5 @@
 #SBATCH --mail-user=amulya.baral@nmbu.no            # Email when job is done.
 #SBATCH --mail-type=ALL
 
+module load prokka
 for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa; do filename=$(basename -- "$contig_file" .fa); prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename --prefix $filename $contig_file; done

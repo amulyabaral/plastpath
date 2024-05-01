@@ -7,4 +7,4 @@
 #SBATCH --mail-type=ALL
 
 module load prokka
-for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa; do filename=$(basename -- "$contig_file" .fa); prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename -cpus 32 --prefix $filename $contig_file; done
+for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa; do filename=$(basename -- "$contig_file" .fa); prokka --outdir /mnt/project/PLASTPATH/prokka_output/$filename --git cpus 32 --prefix $filename $contig_file; done

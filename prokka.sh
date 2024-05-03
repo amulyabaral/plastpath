@@ -7,7 +7,10 @@
 #SBATCH --mail-user=amulya.baral@nmbu.no            # Email when job is done.
 #SBATCH --mail-type=ALL
 
-# Loop through each .fa file in the input directory
+
+module load prokka
+module load Miniconda3
+
 for contig_file in /mnt/project/PLASTPATH/high_quality_bins/*.fa; do
     filename=$(basename -- $contig_file .fa)
     prokka --cpus 32 --outdir /mnt/project/PLASTPATH/prokka_output/$filename --prefix $filename --metagenome $contig_file ;

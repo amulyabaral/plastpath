@@ -1,8 +1,9 @@
 #!/bin/bash
-#SBATCH --ntasks=32                                 # Number of cores (CPU)
-#SBATCH --job-name=blasting               # Job name 
+#SBATCH --ntasks=32
+#SBATCH --gres=gpu:1                                # Number of cores (CPU)
+#SBATCH --job-name=plastpath
 #SBATCH --mem=128G                                 # Required RAM - Default memory per CPU is 3GB.
-#SBATCH --partition=hugemem-avx2                         # Use smallmem for jobs < 10 GB RAM|Options: hugemen, smallmem, gpu
+#SBATCH --partition=gpu                         # Use smallmem for jobs < 10 GB RAM|Options: hugemen, smallmem, gpu
 #SBATCH --mail-user=amulya.baral@nmbu.no            # Email when job is done.
 #SBATCH --mail-type=ALL
 

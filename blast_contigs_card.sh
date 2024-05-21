@@ -10,6 +10,6 @@
 
 for contig_file in /mnt/project/PLASTPATH/megahit_output/*/final.contigs.fa; do
     dir_name=$(basename $(dirname $contig_file))
-    blastn -query $contig_file -db /mnt/project/PLASTPATH/blast_db/card_blastn --outfmt '6 qseqid sseqid salltitles length pident evalue qlen slen qstart qend sstart send' -num_threads 32 -out /mnt/project/PLASTPATH/blast_output/${dir_name}_blast_output.txt ;
+    blastn -query $contig_file -db /mnt/project/PLASTPATH/blast_db/card_blastn -outfmt '6 qseqid sseqid salltitles length pident evalue qlen slen qstart qend sstart send' -num_threads 32 -out /mnt/project/PLASTPATH/blast_output/${dir_name}_blast_output.txt ;
 done
     

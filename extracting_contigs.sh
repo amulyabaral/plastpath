@@ -20,7 +20,7 @@ do
     $0 ~ contig {printit = 1}
     $0 ~ /^>/ && $0 !~ contig {printit = 0}
     printit {print}
-  ' "$FASTA_FOLDER"/*.fasta >> "$OUTPUT_FASTA"
+  ' "$FASTA_FOLDER"/final.contigs.fa >> "$OUTPUT_FASTA"
 done < "$CONTIGS_FILE"
 
 echo "Contig extraction complete."

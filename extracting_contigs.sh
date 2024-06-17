@@ -7,10 +7,10 @@ contig_file="/mnt/project/PLASTPATH/contig_and_file.txt"
 while IFS= read -r line
 do
   # Extract the qseqid (assuming it's the first column)
-  qseqid=$(echo $line | cut -d ' ' -f 1)
+  qseqid=$(echo $line | cut -d ' ' -f 1 | tr -d '[:space:]')
 
-  # Extract the FileName (assuming it's the second column)
-  directory_name=$(echo $line | cut -d ' ' -f 2)
+  # Extract the FileName (assuming it's the second column) and trim spaces
+  directory_name=$(echo $line | cut -d ' ' -f 2 | tr -d '[:space:]')
 
   # Construct the path to the FASTA file
   fasta_file_path="/mnt/project/PLASTPATH/megahit_output/$directory_name/final_contigs.fa"

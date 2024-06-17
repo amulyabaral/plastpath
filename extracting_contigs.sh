@@ -18,7 +18,7 @@ do
   # Check if the file exists
   if [ -f "$fasta_file_path" ]; then
     # Use awk to search for the contig in the FASTA file
-    awk -v seq=">$qseqid" 'BEGIN {RS = ">"} $1 == seq {print ">"$0}' "$fasta_file_path"
+    grep -A 1 ">$qseqid" /mnt/project/PLASTPATH/megahit_output/$fasta_file_path/final.contigs.fa
   else
     echo "File not found: $fasta_file_path"
   fi

@@ -6,8 +6,4 @@
 #SBATCH --mail-user=amulya.baral@nmbu.no # Email me when job is done.
 #SBATCH --mail-type=ALL
 
-# cd $SCRATCH/PLASTPATH
-# conda activate plastpath_resistome
-
-# Iterate through the forward read files
- kraken2 --threads 64 --db /mnt/SCRATCH/amulyab/PLASTPATH/k2_standard_20231009 /mnt/project/PLASTPATH/plastpath/extracted_contigs_with_flanks.fa --output /mnt/project/PLASTPATH/kraken2_output/contigs_flank.kraken_out.txt --report /mnt/project/PLASTPATH/kraken2_output/contigs_flank.kraken_report.txt --use-names
+ kraken2 --threads 64 --db /mnt/SCRATCH/amulyab/PLASTPATH/k2_standard_20231009 --output /mnt/project/PLASTPATH/kraken2_output/contigs_flank.kraken_out.txt --report /mnt/project/PLASTPATH/kraken2_output/contigs_flank.kraken_report.txt --use-names /mnt/project/PLASTPATH/plastpath/extracted_contigs_with_flanks.fa

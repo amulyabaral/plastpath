@@ -13,7 +13,7 @@ do
   directory_name=$(echo $line | cut -d ' ' -f 2 | tr -d '[:space:]')
 
   # Construct the path to the FASTA file
-  fasta_file_path="/mnt/project/PLASTPATH/megahit_output/$directory_name/final_contigs.fa"
+  fasta_file_path="/mnt/project/PLASTPATH/megahit_output/$directory_name/final.contigs.fa"
 
   # Check if the file exists
   if [ -f "$fasta_file_path" ]; then

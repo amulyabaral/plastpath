@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to the contig_and_file text file
-contig_file="path/to/contig_and_file.txt"
+contig_file="/mnt/project/PLASTPATH/contig_and_file.txt"
 
 # Read the contig_and_file text file line by line
 while IFS= read -r line
